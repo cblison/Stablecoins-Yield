@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Stablecoins Yield Project</title>
-  </head>
-  <body>
-    <h1>Welcome to Stablecoins Yield!</h1>
-    <p>This is the project website for Stablecoins-Yield, hosted on GitHub Pages.</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stablecoin Yield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @font-face {
+      font-family: 'PP Mori';
+      src: url('PPMori-Regular.woff2') format('woff2'),
+           url('PPMori-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      background-color: #162f29;
+      color: #ffffff;
+      font-family: 'PP Mori', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 2.5em;
+    }
+    #yield-table {
+      width: 90%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background: rgba(22,47,41,0.98);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    }
+    #yield-table th, #yield-table td {
+      padding: 12px 20px;
+      text-align: left;
+      border-bottom: 1px solid #243a32;
+    }
+    #yield-table th {
+      background-color: #162f29;
+      color: #ffffff;
+      font-weight: bold;
+    }
+    #yield-table tr:last-child td {
+      border-bottom: none;
+    }
+    .loading {
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stablecoin Yield</h1>
+  <div class="loading" id="loading">Loading stablecoin yields...</div>
+  <table id="yield-table" style="display:none;">
+    <thead>
+      <tr>
+        <th>Platform</th>
+        <th>Stablecoin</th>
+        <th>APY</th>
+        <th>TVL</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <!-- Data will go here -->
+    </tbody>
+  </table>
+  <script>
+    // Next step: Fetch data from DefiLlama API and populate the table.
+  </script>
+</body>
 </html>
