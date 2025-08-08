@@ -51,6 +51,12 @@
       font-size: 1.2em;
       margin-top: 48px;
     }
+    .error {
+      text-align: center;
+      color: #ff8585;
+      margin-top: 48px;
+      font-size: 1.2em;
+    }
   </style>
 </head>
 <body>
@@ -69,8 +75,45 @@
       <!-- Data will go here -->
     </tbody>
   </table>
+  <div id="error" class="error" style="display:none;"></div>
   <script>
-    // Next step: Fetch data from DefiLlama API and populate the table.
+    async function fetchYields() {
+      const loading = document.getElementById('loading');
+      const table = document.getElementById('yield-table');
+      const tbody = document.getElementById('table-body');
+      const errorDiv = document.getElementById('error');
+      try {
+        const res = await fetch('https://api.llama.fi/yields/stablecoins');
+        if (!res.ok) throw new Error('Network response was not ok');
+        const data = await res.json();
+
+        tbody.innerHTML = '';
+        if (Array.isArray(data) && data.length > 0) {
+          data.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${item.project || '-'}</td>
+              <td>${item.symbol || '-'}</td>
+              <td>${item.apy ? (item.apy * 100).toFixed(2) + '%' : '-'}</td>
+              <td>${item.tvlUsd ? '$' + Number(item.tvlUsd).toLocaleString() : '-'}</td>
+            `;
+            tbody.appendChild(row);
+          });
+          loading.style.display = 'none';
+          table.style.display = '';
+        } else {
+          loading.style.display = 'none';
+          errorDiv.style.display = '';
+          errorDiv.textContent = 'No yield data found.';
+        }
+      } catch (err) {
+        loading.style.display = 'none';
+        errorDiv.style.display = '';
+        errorDiv.textContent = 'Failed to load data. Please try again later.';
+        console.error(err);
+      }
+    }
+    fetchYields();
   </script>
 </body>
 </html>
